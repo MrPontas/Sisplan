@@ -1,0 +1,56 @@
+html {
+    background-color: #e1dbe4;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+
+    background-color: transparent;
+}
+
+#form-auth {
+    display: flex;
+    flex-direction: column;
+    background-color: #F8F0FB;
+    /* background-color: #D0CFEC; */
+    padding: 20px 50px;
+    border-radius: 20px;
+    
+}
+#form-auth > p {
+    font-size: 18px;
+    color: #5d5a5e;
+}
+#form-auth > h1 {
+    font-size: 30px;
+    font-weight: 600;
+    color: #5d5a5e;
+    align-self: center;
+
+}
+#form-auth > input {
+    width: 250px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: large;
+    font-weight: 600;
+    box-shadow: none;
+    outline: 0;
+}
+#form-auth > button {
+    width: 260px;
+    height: 50px;
+
+    margin-top: 50px;
+
+    font-size: large;
+    font-weight: 600;
+
+    align-self: center;
+    border-radius: 10px;
+    background-color: #589ff0;
+    color: #e4dcdc;
+}

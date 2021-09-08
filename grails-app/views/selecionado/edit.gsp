@@ -26,7 +26,7 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.selecionado}" method="PUT">
+            <g:form resource="${this.selecionado}" method="POST">
                 <g:hiddenField name="version" value="${this.selecionado?.version}" />
                 <fieldset class="form">
                     <f:all bean="selecionado"/>

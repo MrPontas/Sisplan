@@ -1,8 +1,11 @@
 package sisplan
 
 class Selecionado {
-    Integer plantioSelecionado
+    Plantio plantio
 
     static constraints = {
+    }
+    static mapping = {
+        id generator: 'sequence', params: [sequence: 'sequence_cliente']
     }
 }

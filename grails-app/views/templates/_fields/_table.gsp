@@ -9,7 +9,7 @@
                 <g:sortableColumn property="Umidade" title="Umidade" />                   
                 <g:sortableColumn property="Erro" title="Erro" />                   
             
-            <%-- <th>Editar</th> --%>
+            <th>Editar</th>
         </tr>
         
     </thead>
@@ -26,7 +26,7 @@
                 <td>
                     ${plantio.erro}${'%'}
                 </td>
-                <%-- <td>
+                <td>
                     <g:link action="edit" id="${plantio.id}">
                         <button class= "btn btn-outline-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
@@ -34,7 +34,7 @@
                             </svg>
                         </button>
                     </g:link>
-                </td> --%>
+                </td>
             </tr>
         </g:each>
     </tbody>

@@ -1,28 +1,31 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'selecionado.label', default: 'Selecionado')}" />
-        <title><g:message code="default.list.label" args="[entityName]" /></title>
-    </head>
-    <body>
-        <a href="#list-selecionado" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="list-selecionado" class="content scaffold-list" role="main">
-            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-                <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <f:table collection="${selecionadoList}" />
+<head>
+    <meta name="layout" content="main"/>
+    <title>Sisplan</title>
+    <asset:stylesheet src="bootstrap.css" />
 
-            <div class="pagination">
-                <g:paginate total="${selecionadoCount ?: 0}" />
-            </div>
-        </div>
-    </body>
+</head>
+
+<body>
+    <div class="content">
+        <h1>Selecione o plantio de operação: </h1>
+        <g:form>
+            <g:select
+                class="form-select" 
+                from="${sisplan.Plantio.list()}"
+                name="plantio.id"
+                optionKey="id"
+                optionValue="nome"
+                value="${plantio?.id}"
+                noSelection="['':'']"
+                onchange="ajaxPost(this, '${createLink(controller: "selecionado", action:"setPlantioSelecionado")}', 'divContent', false);"
+                />
+        </g:form>
+
+    </div>
+    <div id="divContent" class="divContent">
+        <g:render template="divContent" model="[plantio:plantio]" />
+    </div>
+</body>
 </html>

@@ -7,11 +7,13 @@ class SelecionadoController {
 
     SelecionadoService selecionadoService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond selecionadoService.list(params), model:[selecionadoCount: selecionadoService.count()]
+    def index() {
+        def selecionado = Selecionado.get(1)
+        def plantio = Plantio.get(selecionado.plantioId)
+        render(view:"index", model:[plantio:plantio])
+
     }
 
     def show(Long id) {
@@ -95,5 +97,31 @@ class SelecionadoController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    def getPlantioSelecionado() {
+        
+    }
+
+    def setPlantioSelecionado(){
+        def selecionado;
+        if(!params.plantio){ 
+            render(template:"divContent")
+            return
+        }
+        if(sisplan.Selecionado.list().size() == 0)
+            selecionado = new Selecionado(params);
+        else {
+            selecionado = Selecionado.list()[0]
+            selecionado.properties = params
+        }
+        if (!selecionado.save(flush: true)) {
+            print "não salvou"
+            return
+        }
+        
+        def plantio = Plantio.get(selecionado.plantioId)
+        render(template:"divContent", model:[plantio:plantio])
+        return
     }
 }

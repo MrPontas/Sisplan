@@ -2,12 +2,13 @@ package sisplan
 
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
+import org.springframework.transaction.annotation.Transactional;
 
 class PlantioController {
 
     PlantioService plantioService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -73,16 +74,14 @@ class PlantioController {
             }
         }
         plantio.properties = params
-
         if (!plantio.save(flush: true)) {
             render(view: "edit", model: [plantio: plantio])
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'compra.label', default: 'Compra'), compra.id])
-        redirect(action: "index", id: compra.id)
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'plantio.label', default: 'Plantio'), plantio.id])
+        redirect(action: "index", id: plantio.id)
     }
-
     def delete(Long id) {
         if (id == null) {
             notFound()
