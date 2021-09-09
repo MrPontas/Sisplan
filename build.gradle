@@ -71,12 +71,12 @@ bootRun {
     systemProperty springProfilesActive, System.getProperty(springProfilesActive)
 }
 
-tasks.withType(Test) {
-    systemProperty "geb.env", System.getProperty('geb.env')
-    systemProperty "geb.build.reportsDir", reporting.file("geb/integrationTest")
-    systemProperty "webdriver.chrome.driver", System.getProperty('webdriver.chrome.driver')
-    systemProperty "webdriver.gecko.driver", System.getProperty('webdriver.gecko.driver')
-}
+// tasks.withType(Test) {
+//     systemProperty "geb.env", System.getProperty('geb.env')
+//     systemProperty "geb.build.reportsDir", reporting.file("geb/integrationTest")
+//     systemProperty "webdriver.chrome.driver", System.getProperty('webdriver.chrome.driver')
+//     systemProperty "webdriver.gecko.driver", System.getProperty('webdriver.gecko.driver')
+// }
 
 task stage(dependsOn: ['build', 'clean'])
 build.mustRunAfter clean
