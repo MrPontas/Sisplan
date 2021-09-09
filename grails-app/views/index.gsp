@@ -18,7 +18,8 @@
 </head>
 <body class="bodyInicio">
     <div class="content">
-        <g:form>
+        <<g:if test="${ sisplan.Plantio.list() > 0 }">
+            <g:form>
             <g:select 
                 from="${sisplan.Plantio.list()}"
                 name="plantio.id"
@@ -27,6 +28,10 @@
                 onchange="ajaxPost(this, '${createLink(controller: "selecionado", action:"setPlantioSelecionado")}', 'divContent', false);"
                 />
         </g:form>
+        </g:if>
+        <g:else>
+           <h1>Ops! Parece que nenhum plantio foi criado. Por favor, insira um plantio para poder defini-lo.</h1>
+        </g:else>
 
     </div>
 

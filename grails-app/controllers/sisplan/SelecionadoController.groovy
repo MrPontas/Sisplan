@@ -11,9 +11,10 @@ class SelecionadoController {
 
     def index() {
         def selecionado = Selecionado.get(1)
-        def plantio = Plantio.get(selecionado.plantioId)
-        render(view:"index", model:[plantio:plantio])
-
+        if(selecionado){
+            def plantio = Plantio.get(selecionado.plantioId)
+            render(view:"index", model:[plantio:plantio])
+        }
     }
 
     def show(Long id) {
