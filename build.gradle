@@ -77,10 +77,6 @@ tasks.withType(Test) {
     systemProperty "webdriver.chrome.driver", System.getProperty('webdriver.chrome.driver')
     systemProperty "webdriver.gecko.driver", System.getProperty('webdriver.gecko.driver')
 }
-task copyToLib(type: Copy) {
-    into "$buildDir/libs"
-    from(configurations.compile)
-}
 
 task stage(dependsOn: ['build', 'clean'])
 build.mustRunAfter clean
