@@ -21,6 +21,7 @@
         <<g:if test="${ sisplan.Plantio.list() > 0 }">
             <g:form>
             <g:select 
+                class="form-control"
                 from="${sisplan.Plantio.list()}"
                 name="plantio.id"
                 optionKey="id"

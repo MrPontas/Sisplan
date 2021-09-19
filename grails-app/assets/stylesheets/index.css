@@ -1,23 +1,26 @@
 html {
-    background-color: #e1dbe4;
+    flex: 1;
+    background: url('../images/background.jpg') no-repeat center;
+    background-size: cover;
 }
 
-#content {
+#divContent {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 100px;
-
-    background-color: transparent;
 }
 
 #form-auth {
     display: flex;
     flex-direction: column;
-    background-color: #F8F0FB;
+    background-color: white;
     /* background-color: #D0CFEC; */
     padding: 20px 50px;
-    border-radius: 20px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    transform: translate(0, 50px);
+    transition: transform 300ms ease-in-out;
     
 }
 #form-auth > p {
@@ -50,7 +53,8 @@ html {
     font-weight: 600;
 
     align-self: center;
-    border-radius: 10px;
-    background-color: #589ff0;
-    color: #e4dcdc;
+    /* border-radius: 10px; */
+    /* background-color: #589ff0; */
+    /* color: #e4dcdc; */
+    cursor: pointer;
 }

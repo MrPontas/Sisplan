@@ -39,6 +39,8 @@ dependencies {
     compile "org.grails:grails-plugin-services"
     compile "org.grails:grails-plugin-url-mappings"
     compile "org.grails:grails-plugin-interceptors"
+    //paho
+    compile "org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.0"
     compile "org.grails.plugins:cache"
     compile "org.grails.plugins:async"
     compile "org.grails.plugins:scaffolding"
@@ -70,16 +72,6 @@ bootRun {
     String springProfilesActive = 'spring.profiles.active'
     systemProperty springProfilesActive, System.getProperty(springProfilesActive)
 }
-
-// tasks.withType(Test) {
-//     systemProperty "geb.env", System.getProperty('geb.env')
-//     systemProperty "geb.build.reportsDir", reporting.file("geb/integrationTest")
-//     systemProperty "webdriver.chrome.driver", System.getProperty('webdriver.chrome.driver')
-//     systemProperty "webdriver.gecko.driver", System.getProperty('webdriver.gecko.driver')
-// }
-
-task stage(dependsOn: ['build', 'clean'])
-build.mustRunAfter clean
 
 assets {
     minifyJs = true
