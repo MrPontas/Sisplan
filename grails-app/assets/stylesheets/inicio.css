@@ -1,13 +1,20 @@
+.tela-selecionado {
+    display: flex;
+    flex-direction: row;
+    margin: 70px;
+
+}
+
 .divContent {
     display: flex;
     flex-direction: row;
-    border: 1px solid #4986cc;
-    border-radius: 10px;
-    margin: 70px;
+    border: 1px dashed #4986cc;
+    /* border-radius: 5px; */
+    margin-top: 70px;
     padding: 20px;
     width: 600px;
 }
-.divContent > h1 {
+.titulo-div {
     margin: 0;
     font-size: 24px;
 }
@@ -15,23 +22,57 @@
     margin-left: 50px;
     display: flex;
     flex-direction: column;
+    visibility: visible;
 }
 .infoPlantio > p {
     font-size: 18px;
     margin-bottom: 10px;
 }
-.content {
+.content-plantio {
     display: flex;
     flex-direction: row;
-    border: 1px solid #4986cc;
-    border-radius: 10px;
-    margin: 70px;
+    align-items: center;
+    border: 1px dashed #4986cc;
+    /* border-radius: 5px; */
     padding: 20px;
     width: 600px;
 }
-.content > h1 {
+.content-plantio > h1 {
     margin: 0;
     font-size: 18px;
     margin-right: 10px;
-    text-decoration: none;
+}
+
+.mostra-umidade {
+    display: flex;
+    flex-direction: row;
+    margin-left: 70px;
+    padding: 20px;
+    border: 1px dashed #4986cc;
+}
+.mostra-umidade > i {
+    margin-right: 30px;
+    font-size: 100px;
+    color: #4986cc;
+}
+.porcentage-umidade {
+    color: rgb(17, 16, 16);
+    font-size: 60px;
+
+}
+.atualizar-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 30px;
+}
+.btn {
+    margin-left: 20px;
+}
+.status-irrigacao {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin-top: 20px;
 }

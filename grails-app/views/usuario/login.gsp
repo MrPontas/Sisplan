@@ -12,6 +12,7 @@
     <div id="divContent">
         <g:form action="validarSenha">
             <div id="form-auth">
+                <asset:image class="logo-inicio" src="LOGO.png"/>
                 <h1>Tela de login</h1>
                 <p>Login</p>
                 <div class="input-group flex-nowrap">

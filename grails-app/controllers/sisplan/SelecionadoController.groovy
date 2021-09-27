@@ -3,24 +3,22 @@ package sisplan
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 class SelecionadoController {
 
     SelecionadoService selecionadoService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    def mqtt = new Mqtt();
 
     def index() {
-        def selecionado = Selecionado.get(1)
+        mqtt.conectaClienteMqtt();
+        mqtt.subscribe();
 
+        def selecionado = Selecionado.get(1)
         if(selecionado){
             def plantio = mqttPublish(selecionado);
-            render(view:"index", model:[plantio:plantio])
+            render(view:"index", model:[plantio:plantio, umidadeAtual: mqtt.getUmidadeAtual(), umidadePadrao: plantio.umidade])
         }
     }
 
@@ -109,6 +107,7 @@ class SelecionadoController {
 
     def setPlantioSelecionado(){
         def selecionado;
+
         if(!params.plantio){ 
             render(template:"divContent")
             return
@@ -125,6 +124,7 @@ class SelecionadoController {
         }
         if(selecionado){
             mqttPublish(selecionado);
+
         }
         def plantio = Plantio.get(selecionado.plantioId)
         render(template:"divContent", model:[plantio:plantio])
@@ -133,42 +133,26 @@ class SelecionadoController {
     }
 
     def mqttPublish(def selecionado){
-        String broker = "tcp://broker.mqtt-dashboard.com:1883";
-        String clientId = "SisplanClient";
-        String topicoUmidade = "Sisplan.irrigacao.umidade";
-        String topicoErro = "Sisplan.irrigacao.erro";
-        int qos = 2;
-        MemoryPersistence persistence = new MemoryPersistence();
+        // def mqtt = new Mqtt();
 
         def plantio = Plantio.get(selecionado.plantioId)
 
-        try{
-            MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
-            MqttConnectOptions connOpts = new MqttConnectOptions();
-            connOpts.setCleanSession(true);
-            println("Connecting to broker: "+broker);
-            sampleClient.connect(connOpts);
-            println("Connected");
-            println("Publishing message: " + plantio.nome);
-            def umidadeString = String.valueOf(plantio.umidade)
-            def margemErroString = String.valueOf(plantio.erro)
-            MqttMessage messageUmidade = new MqttMessage(umidadeString.getBytes());
-            MqttMessage messageErrorMargin = new MqttMessage(margemErroString.getBytes());
-            messageUmidade.setQos(qos);
-            messageErrorMargin.setQos(qos);
-            sampleClient.publish(topicoUmidade, messageUmidade);
-            sampleClient.publish(topicoErro, messageErrorMargin);
-            println("Message published");
-            sampleClient.disconnect();
+        mqtt.conectaClienteMqtt();
+        mqtt.publicaMensagem(selecionado.plantio.erro.toString(), "erro");
+        mqtt.publicaMensagem(selecionado.plantio.umidade.toString(), "umidade");
 
-            return plantio;
-        } catch(MqttException me){
-            println("reason "+me.getReasonCode());
-            println("msg "+me.getMessage());
-            println("loc "+me.getLocalizedMessage());
-            println("cause "+me.getCause());
-            // println("excep "+me);
-            me.printStackTrace();
-        }
+
+        return plantio;
+
+    }
+
+    def getUmidadeAtual(){
+        def selecionado = Selecionado.list()[0]
+        def plantio = Plantio.get(selecionado.plantioId)
+        
+        String umidadeAtual = mqtt.getUmidadeAtual();
+
+        println "controle " + umidadeAtual
+        render(template: "umidadeDiv", model:[umidadeAtual:umidadeAtual, umidadePadrao: plantio.umidade]);
     }
 }

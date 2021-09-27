@@ -21,8 +21,8 @@
 }
 body { 
   /* background: rgb(203, 191, 187); */
-  background: #F8F0FB;
-  color: rgb(73, 56, 67);
+  background: white;
+  /* color: rgb(73, 56, 67); */
 }
 border-style, input, button {
   font-family: 'Roboto', sans-serif;
@@ -43,7 +43,6 @@ header {
   justify-content: left;
   align-items: center;
 
-  padding-left: 80px;
   max-height: 70px;
   height: 100%;
   background-color: #007Bff;
@@ -88,6 +87,13 @@ header > a:focus, a.menuSelecionado{
   color:#4986cc;
   box-shadow: none;
   outline: 0;
+}
+
+.logo {
+  width: 70px;
+
+  margin-right: 50px;
+  margin-left: 30px;
 }
 
 .divExit {

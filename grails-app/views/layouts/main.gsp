@@ -7,10 +7,11 @@
         <g:layoutTitle default="Sisplan"/>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <asset:link rel="icon" href="favicon.png" type="image/x-ico"/>
+    <asset:link rel="icon" href="LOGO.png" type="image/x-ico"/>
 
     <asset:stylesheet src="application.css"/>
     <asset:stylesheet src="bootsrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <%-- <script src="http://requirejs.org/docs/release/2.1.5/comments/require.js"></script> --%>
 
   
@@ -22,6 +23,7 @@
     <%-- <button type="button">Produtos</button>
     <button type="button">Clientes</button>
     <button type="button">Compras</button> --%>
+    <asset:image class="logo" src="LOGO-inverso.png" />
     <g:link controller="selecionado" class="${((controllerName == "selecionado") ? "menuSelecionado" : "")}" >
         <g:message code="selecionado.label" default="Início" />
     </g:link>
