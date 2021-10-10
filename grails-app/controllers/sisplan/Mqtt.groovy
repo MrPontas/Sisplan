@@ -67,6 +67,7 @@ class Mqtt {
     }
     def subscribe(){
         String topico = "Sisplan.irrigacao.umidadeAtual";
+        String topicoStatus = "Sisplan.irrigacao.umidadeAtual";
 
         mqttCliente.setCallback(new MqttCallback() {
             public void messageArrived(String topic, MqttMessage message) throws Exception {
@@ -84,6 +85,7 @@ class Mqtt {
             }
         });
         mqttCliente.subscribe(topico, qos);
+        mqttCliente.subscribe(topicoStatus, qos);
 
     }
     String getUmidadeAtual(){

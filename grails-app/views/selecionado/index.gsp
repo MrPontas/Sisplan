@@ -38,13 +38,16 @@
         </div>
     </div>
     <script type="text/javascript">
-    
+        var refresh_time = 2000;
+        window.onload = function(){
 
+            setInterval(function(){ajaxPost(this, '${createLink(action:"getUmidadeAtual")}', 'mostra-umidade', false);}, refresh_time);
+
+  }
         function onChangeSelect(selectObj){
             document.getElementById("infoPlantio").innerHTML = '<asset:image id="spinner-img" class="spinner-img" src="spinner.gif" />';
             document.getElementById("spinner-img").style.visibility = "visible";
             document.getElementById("spinner-img").style.height = "105px";
-            
             ajaxPost(selectObj, '${createLink(controller: "selecionado", action:"setPlantioSelecionado")}', 'divContent', false);
         }
     </script>

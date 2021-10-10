@@ -16,9 +16,14 @@ class SelecionadoController {
         mqtt.subscribe();
 
         def selecionado = Selecionado.get(1)
+
+        String umidadeAtual = mqtt.getUmidadeAtual();
         if(selecionado){
             def plantio = mqttPublish(selecionado);
-            render(view:"index", model:[plantio:plantio, umidadeAtual: mqtt.getUmidadeAtual(), umidadePadrao: plantio.umidade])
+            if(!plantio)
+                render(status:200)
+            if(!umidadeAtual) umidadeAtual = plantio.umidade;
+            render(view:"index", model:[plantio:plantio, umidadeAtual: umidadeAtual.substring(0, umidadeAtual.length() - 3), umidadePadrao: plantio.umidade])
         }
     }
 
@@ -151,8 +156,8 @@ class SelecionadoController {
         def plantio = Plantio.get(selecionado.plantioId)
         
         String umidadeAtual = mqtt.getUmidadeAtual();
+        println umidadeAtual
 
-        println "controle " + umidadeAtual
-        render(template: "umidadeDiv", model:[umidadeAtual:umidadeAtual, umidadePadrao: plantio.umidade]);
+        render(template: "umidadeDiv", model:[umidadeAtual:umidadeAtual.substring(0, umidadeAtual.length() - 3), umidadePadrao: plantio.umidade]);
     }
 }
